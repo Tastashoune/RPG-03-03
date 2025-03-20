@@ -23,7 +23,6 @@ public class InventoryManager : MonoBehaviour
     public static InventoryManager Instance { get; private set; }
     private void Awake()
     {
-
         // Singleton pattern
         if (Instance != null && Instance != this)
         {
