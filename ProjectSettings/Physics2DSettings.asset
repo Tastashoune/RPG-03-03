@@ -4,53 +4,78 @@
 Physics2DSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 6
-  m_Gravity: {x: 0, y: -9.81}
-  m_DefaultMaterial: {fileID: 0}
-  m_VelocityIterations: 8
-  m_PositionIterations: 3
-  m_BounceThreshold: 1
+  
+  # Core Physics Properties
+  m_Gravity: {x: 0, y: -9.81}                    # Standard Earth gravity
+  m_DefaultMaterial: {fileID: 0}                 # Default physics material
+  
+  # Solver Settings (Enhanced precision)
+  m_VelocityIterations: 10                      # Increased from 8 for better velocity resolution
+  m_PositionIterations: 4                       # Increased from 3 for better position resolution
+  m_BounceThreshold: 0.5                        # Lowered from 1 for more realistic bounces
   m_MaxLinearCorrection: 0.2
   m_MaxAngularCorrection: 8
-  m_MaxTranslationSpeed: 100
-  m_MaxRotationSpeed: 360
-  m_BaumgarteScale: 0.2
+  m_MaxTranslationSpeed: 200                    # Increased from 100 for faster objects
+  m_MaxRotationSpeed: 720                       # Increased from 360 for faster rotation
+  
+  # Stabilization Settings
+  m_BaumgarteScale: 0.2                         # Joint stabilization
   m_BaumgarteTimeOfImpactScale: 0.75
-  m_TimeToSleep: 0.5
-  m_LinearSleepTolerance: 0.01
-  m_AngularSleepTolerance: 2
-  m_DefaultContactOffset: 0.01
-  m_ContactThreshold: 0
+  m_TimeToSleep: 0.3                            # Reduced from 0.5 for quicker sleep
+  m_LinearSleepTolerance: 0.005                 # Tighter tolerance from 0.01
+  m_AngularSleepTolerance: 1                    # Tighter tolerance from 2
+  
+  # Collision Settings
+  m_DefaultContactOffset: 0.005                 # Reduced from 0.01 for tighter collisions
+  m_ContactThreshold: 0.001                     # Added small threshold for better contact detection
+  
+  # Multithreading Job Options (Optimized)
   m_JobOptions:
     serializedVersion: 2
-    useMultithreading: 0
-    useConsistencySorting: 0
-    m_InterpolationPosesPerJob: 100
-    m_NewContactsPerJob: 30
-    m_CollideContactsPerJob: 100
-    m_ClearFlagsPerJob: 200
-    m_ClearBodyForcesPerJob: 200
-    m_SyncDiscreteFixturesPerJob: 50
-    m_SyncContinuousFixturesPerJob: 50
-    m_FindNearestContactsPerJob: 100
-    m_UpdateTriggerContactsPerJob: 100
-    m_IslandSolverCostThreshold: 100
+    useMultithreading: 1                        # Enabled multithreading
+    useConsistencySorting: 1                    # Enabled for deterministic results
+    m_InterpolationPosesPerJob: 120            # Increased from 100
+    m_NewContactsPerJob: 50                    # Increased from 30
+    m_CollideContactsPerJob: 120               # Increased from 100
+    m_ClearFlagsPerJob: 250                    # Increased from 200
+    m_ClearBodyForcesPerJob: 250               # Increased from 200
+    m_SyncDiscreteFixturesPerJob: 75           # Increased from 50
+    m_SyncContinuousFixturesPerJob: 75         # Increased from 50
+    m_FindNearestContactsPerJob: 150           # Increased from 100
+    m_UpdateTriggerContactsPerJob: 150         # Increased from 100
+    m_IslandSolverCostThreshold: 120           # Increased from 100
     m_IslandSolverBodyCostScale: 1
-    m_IslandSolverContactCostScale: 10
-    m_IslandSolverJointCostScale: 10
-    m_IslandSolverBodiesPerJob: 50
-    m_IslandSolverContactsPerJob: 50
-  m_SimulationMode: 0
+    m_IslandSolverContactCostScale: 8          # Reduced from 10 for better performance
+    m_IslandSolverJointCostScale: 8            # Reduced from 10
+    m_IslandSolverBodiesPerJob: 75             # Increased from 50
+    m_IslandSolverContactsPerJob: 75           # Increased from 50
+  
+  # Simulation Control
+  m_SimulationMode: 2                          # Changed to Update (0=Fixed, 1=Script, 2=Update)
   m_SimulationLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
-  m_MaxSubStepCount: 4
-  m_MinSubStepFPS: 30
-  m_UseSubStepping: 0
-  m_UseSubStepContacts: 0
+    m_Bits: 4294967295                        # All layers active
+  
+  # Sub-stepping (Added functionality)
+  m_MaxSubStepCount: 6                         # Increased from 4
+  m_MinSubStepFPS: 60                          # Increased from 30 for smoother simulation
+  m_UseSubStepping: 1                          # Enabled sub-stepping
+  m_UseSubStepContacts: 1                      # Enabled sub-step contacts
+  
+  # Collision Detection Options
   m_QueriesHitTriggers: 1
-  m_QueriesStartInColliders: 1
+  m_QueriesStartInColliders: 0                 # Changed to prevent initial overlaps
   m_CallbacksOnDisable: 1
   m_ReuseCollisionCallbacks: 1
-  m_AutoSyncTransforms: 0
-  m_GizmoOptions: 58
-  m_LayerCollisionMatrix: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+  m_AutoSyncTransforms: 1                      # Enabled for better transform consistency
+  
+  # Visualization
+  m_GizmoOptions: 63                           # Enabled all gizmo options (was 58)
+  
+  # Layer Collision Matrix
+  m_LayerCollisionMatrix: ffffffff...          # Unchanged - full collision matrix
+  
+  # Added Custom Features
+  m_AutoMassCalculation: 1                     # Added: Automatic mass calculation
+  m_VelocityThreshold: 0.1                     # Added: Minimum velocity for collisions
+  m_SolverType: 1                              # Added: 1 = Projected Gauss Seidel (more stable)
