@@ -6409,6 +6409,7 @@ MonoBehaviour:
   enemyLayers:
     serializedVersion: 2
     m_Bits: 8
+  gom: {fileID: 0}
   onHealthChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -7902,6 +7903,7 @@ MonoBehaviour:
   enemyLayers:
     serializedVersion: 2
     m_Bits: 8
+  gom: {fileID: 0}
   onHealthChanged:
     m_PersistentCalls:
       m_Calls: []

@@ -30,7 +30,7 @@ public class InventoryManager : MonoBehaviour
             return;
         }
         Instance = this;
-
+        Debug.Log("Awake");
 
         // Initialiser les slots d'inventaire
         for (int i = 0; i < inventorySize; i++)
@@ -41,6 +41,7 @@ public class InventoryManager : MonoBehaviour
         // Fermer l'inventaire au démarrage
         if (inventoryPanel != null)
         {
+            Debug.Log("fermeture inventaire");
             inventoryPanel.SetActive(false);
         }
 
@@ -54,12 +55,15 @@ public class InventoryManager : MonoBehaviour
 
     private void Start()
     {
+        Debug.Log("Start");
+
         // Créer les slots UI
         RefreshInventoryUI();
     }
 
     private void OnEnable()
     {
+        Debug.Log("OnEnable");
         // Activer l'action d'input
         if (inventoryAction != null)
         {

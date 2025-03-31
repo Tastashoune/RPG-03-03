@@ -2,7 +2,8 @@
 // Il est au cœur du gameplay, permettant au joueur d'interagir avec les ennemis
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Events;  // Nécessaire pour utiliser UnityEvent
+using UnityEngine.Events;
+using UnityEngine.SceneManagement;  // Nécessaire pour utiliser UnityEvent
 public class PlayerCombatSystem : MonoBehaviour
 {
     // --- PARAMÈTRES DE SANTÉ ---
@@ -21,6 +22,9 @@ public class PlayerCombatSystem : MonoBehaviour
     public float attackRange = 1.0f;  // Distance à laquelle le joueur peut attaquer
     public float attackCooldown = 0.5f; // Temps minimum entre deux attaques (en secondes)
     public LayerMask enemyLayers;    // Couches (Layers) qui contiennent les ennemis
+
+    [Header("Game Over Settings")]
+    public GameOverManager gom;
 
     // --- ÉVÉNEMENTS ---
     // Les UnityEvents permettent de connecter ce script à d'autres systèmes (comme l'UI)
@@ -234,5 +238,8 @@ public class PlayerCombatSystem : MonoBehaviour
 
         GameObject goPlayer = GameObject.FindGameObjectWithTag("Player");
         Destroy(goPlayer);
+        // affichage UI de game over
+        //gom.ActiveGoPanel();
+        SceneManager.LoadScene("GameOver");
     }
 }
